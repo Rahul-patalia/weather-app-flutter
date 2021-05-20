@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/pages/loading.dart';
-import 'package:weather_app/pages/choose_location.dart';
-import 'package:weather_app/pages/home.dart';
+
 
 class ChooseLocation extends StatefulWidget {
   @override
