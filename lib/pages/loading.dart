@@ -25,7 +25,7 @@ class _LoadingState extends State<Loading>
   {
     super.initState();
     getWeatherInfo();
-  }
+  } 
 
   @override
   Widget build(BuildContext context) {
