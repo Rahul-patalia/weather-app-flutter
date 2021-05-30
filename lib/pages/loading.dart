@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:weather_app/services/world_weather.dart';
+
 
 
 class Loading extends StatefulWidget {
@@ -12,25 +11,33 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> 
 {
 
-  void getWeatherInfo() async
+  String time = 'Loading';
+
+  void setUpWorldWeather() async
   {
-    // get();
-    Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/Australia/Melbourne'));
-    Map data = jsonDecode(response.body);
-    print(data);
+    world_weather weather = world_weather(flag: "au flag", location: "Melbourne", time: "asd", url: "India");
+    await weather.getWeatherInfo();
+    print(weather.time);
+    setState(() {
+          time = weather.time;
+        });
   }
 
 @override
   void initState() 
   {
     super.initState();
-    getWeatherInfo();
+    setUpWorldWeather(); 
   } 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("Loading"),
+      body: Padding
+      (
+        padding: EdgeInsets.all(50.0),
+        child: Text(time),
+      ),
     );
   }
 }
