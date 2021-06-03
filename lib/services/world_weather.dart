@@ -9,6 +9,7 @@ class world_weather
   String time;
   String flag;
   String url;
+  bool isDaytime;
 
   world_weather({this.location, this.time, this.url, this.flag});
 
@@ -18,15 +19,18 @@ class world_weather
     try
     {
       Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
-    Map data = jsonDecode(response.body);
-    // print(data);
+      Map data = jsonDecode(response.body);
+      // print(data);
 
-    String datetime = data['datetime'];
-    String offset = data['utc_offset'].substring(1,3).toString();
+      String datetime = data['datetime'];
+      String offset = data['utc_offset'].substring(1,3).toString();
 
-    DateTime now = DateTime.parse(datetime);
-    now = now.add(Duration(hours: int.parse(offset)));
-    time = DateFormat.jm().format(now);
+      DateTime now = DateTime.parse(datetime);
+      now = now.add(Duration(hours: int.parse(offset)));
+      
+      isDaytime = now.hour > 6 && now.hour < 18 ? true : false; 
+      time = DateFormat.jm().format(now);
+      
     }
     catch (e)
     {
