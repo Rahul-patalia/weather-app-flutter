@@ -11,16 +11,16 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> 
 {
 
-  String time = 'Loading';
-
   void setUpWorldWeather() async
   {
-    world_weather weather = world_weather(flag: "au flag", location: "Melbourne", time: "asd", url: "India");
+    world_weather weather = world_weather(flag: "au flag", location: "Melbourne", time: "asd", url: "Australia/Melbourne");
     await weather.getWeatherInfo();
-    print(weather.time);
-    setState(() {
-          time = weather.time;
-        });
+    Navigator.pushReplacementNamed(context, "/home",arguments: 
+    {
+      "location": weather.location,
+      "flag": weather.flag,
+      "time": weather.time
+    });
   }
 
 @override
@@ -36,7 +36,7 @@ class _LoadingState extends State<Loading>
       body: Padding
       (
         padding: EdgeInsets.all(50.0),
-        child: Text(time),
+        child: Text('Loading'),
       ),
     );
   }

@@ -6,27 +6,63 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> 
+{
+  Map Data = {};
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
+
+    Data = ModalRoute.of(context).settings.arguments;
     return Scaffold
     (
       body: SafeArea
       (
-        child: Column
+        child: Padding
         (
-          children: <Widget>
-          [
-            FlatButton.icon
+          padding: const EdgeInsets.fromLTRB(0, 120.0, 0, 0),
+          child: Column
+          (
+            children: <Widget>
+            [
+              FlatButton.icon
+              (
+                onPressed: () 
+                {
+                   Navigator.pushNamed(context, '/location');
+                }, 
+                icon: Icon(Icons.location_on_sharp), 
+                label: Text("Edit Location"),
+              ),
+              SizedBox(height: 20.0,),
+              Row
+              (
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>
+                [
+                   Text
+                   (
+                     Data['location'],
+                     style: TextStyle
+                     (
+                       fontSize: 28.0,
+                       letterSpacing: 2.0
+                     ),
+                   )
+                ],
+              ),
+            SizedBox(height: 20.0,),
+            Text
             (
-              onPressed: () 
-              {
-                 Navigator.pushNamed(context, '/location');
-              }, 
-              icon: Icon(Icons.location_on_sharp), 
-              label: Text("Edit Location"),
-            )
-          ],
+              Data['time'],
+              style: TextStyle
+              (
+                fontSize: 66.0,
+                letterSpacing: 0.0,
+              ),
+            ),
+            ],
+          ),
         )
       ),
     );

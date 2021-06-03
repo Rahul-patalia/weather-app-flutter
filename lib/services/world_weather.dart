@@ -1,5 +1,7 @@
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:intl/intl.dart';
+
 
 class world_weather 
 {
@@ -13,7 +15,9 @@ class world_weather
   Future<void> getWeatherInfo() async
   {
     // get();
-    Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
+    try
+    {
+      Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
     Map data = jsonDecode(response.body);
     // print(data);
 
@@ -22,7 +26,12 @@ class world_weather
 
     DateTime now = DateTime.parse(datetime);
     now = now.add(Duration(hours: int.parse(offset)));
-    time = now.toString();
-    
+    time = DateFormat.jm().format(now);
+    }
+    catch (e)
+    {
+      print("Caugh error: $e");
+      time="Could not get time data";
+    }
   }
 }
