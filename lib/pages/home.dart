@@ -12,9 +12,8 @@ class _HomeState extends State<Home>
   Widget build(BuildContext context) 
   {
 
-    Data = ModalRoute.of(context).settings.arguments;
+    Data = Data.isNotEmpty ? Data : ModalRoute.of(context).settings.arguments;
     
-
     String bgImage = Data['isDayTime'] ? 'day.jpg' : 'night.jpg';
     Color bgColor = Data['isDayTime'] ? Colors.blue : Colors.indigo[700];
 
@@ -42,9 +41,18 @@ class _HomeState extends State<Home>
               [
                 FlatButton.icon
                 (
-                  onPressed: () 
+                  onPressed: () async
                   {
-                     Navigator.pushNamed(context, '/location');
+                    dynamic result = await Navigator.pushNamed(context, '/location');
+                    setState(() {
+                      Data = {
+                        'time': result['time'],
+                        'location': result['location'],
+                        'isDayTime': result['isDayTime'],
+                        'flag': result['flag'],
+                      };
+                    });
+                    print(result);
                   }, 
                   icon: Icon
                   (
