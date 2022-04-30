@@ -19,7 +19,8 @@ class _ChooseLocationState extends State<ChooseLocation>
     world_weather(url: 'America/New_York', location: 'New York', flag: 'usa.png'),
     world_weather(url: 'Asia/Seoul', location: 'Seoul', flag: 'south_korea.png'),
     world_weather(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
-    world_weather(url: 'Asia/Kolkata', location: 'Kolkata', flag: 'usa.png'),
+    world_weather(url: 'Asia/Kolkata', location: 'Kolkata', flag: 'india.png'),
+    world_weather(url: 'Australia/Melbourne', location: 'Melbourne', flag: 'australia.png'),
   ];
 
   void updatetime(index) async
